@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>المعدل والخطط — تيم فكرة</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Cairo', sans-serif;
+      background-color: #f7f4ea;
+    }
+  </style>
+</head>
+<body class="text-slate-800 overflow-x-hidden min-h-screen flex flex-col justify-between">
+
+  <div>
+    <!-- Header -->
+    <header class="max-w-7xl mx-auto px-6 py-6 flex items-center justify-between relative z-10">
+      <a href="index.html" class="flex items-center gap-3 hover:opacity-80 transition">
+        <div class="w-10 h-10 rounded-full bg-[#2a2477] flex items-center justify-center text-yellow-400 text-lg shadow-md">
+          <i class="fa-regular fa-lightbulb"></i>
+        </div>
+        <div class="text-right">
+          <h1 class="text-xl font-bold text-[#2a2477] leading-none">تيم فكرة</h1>
+          <span class="text-xs font-semibold text-[#2a2477] tracking-wider">IDEA TEAM</span>
+        </div>
+      </a>
+
+      <div class="flex items-center gap-4 sm:gap-6 flex-wrap justify-end">
+        <a href="page5.html" class="text-[#2a2477] font-bold text-sm flex items-center gap-2 underline">
+          <i class="fa-solid fa-calculator text-xs"></i>
+          المعدل والخطط
+        </a>
+        <a href="page4.html" class="text-[#2a2477] font-bold text-sm flex items-center gap-2 hover:underline">
+          <i class="fa-solid fa-laptop-code text-xs"></i>
+          الورشات والأنشطة
+        </a>
+        <a href="page2.html" class="text-[#2a2477] font-bold text-sm flex items-center gap-2 hover:underline">
+          <i class="fa-solid fa-book-open text-xs"></i>
+          التلاخيص
+        </a>
+        <a href="page3.html" class="text-[#2a2477] font-bold text-sm flex items-center gap-2 hover:underline">
+          <i class="fa-solid fa-share-nodes text-xs"></i>
+          التواصل الاجتماعي
+        </a>
+        <a href="index.html" class="text-[#2a2477] font-bold text-sm flex items-center gap-2 hover:underline">
+          <i class="fa-solid fa-arrow-right"></i>
+          الرئيسية
+        </a>
+      </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="max-w-4xl mx-auto text-center pt-6 pb-8 px-4 relative">
+      <div class="absolute left-1/2 -top-10 -translate-x-1/2 w-[450px] h-[450px] bg-[radial-gradient(circle,_rgba(253,224,71,0.35)_0%,_rgba(247,244,234,0)_70%)] pointer-events-none -z-10"></div>
+
+      <div class="w-14 h-14 bg-[#2a2477] rounded-full mx-auto flex items-center justify-center text-yellow-400 text-xl mb-4 shadow-md">
+        <i class="fa-solid fa-calculator"></i>
+      </div>
+
+      <h1 class="text-4xl md:text-5xl font-extrabold text-[#2a2477] mb-3 tracking-tight">
+        حاسبة المعدل والخطط الدراسية
+      </h1>
+      <p class="text-slate-600 text-base md:text-lg max-w-lg mx-auto font-medium">
+        احسب معدلك التراكمي واستعرض الخطط الدراسية الخاصة بكل كلية وتخصص بسهولة.
+      </p>
+    </section>
+
+    <!-- قسم الحاسبة -->
+    <section class="max-w-3xl mx-auto px-6 pb-12">
+      <div class="bg-white/90 backdrop-blur-sm p-6 sm:p-8 rounded-3xl border border-slate-200/80 shadow-md">
+        
+        <!-- المعدل السابق -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-6 pb-6 border-b border-slate-200">
+          <div>
+            <label class="block text-xs font-bold text-[#2a2477] mb-1">المعدل التراكمي السابق (من 100)</label>
+            <input type="number" id="prev-gpa" placeholder="مثال: 75.5" min="0" max="100" class="w-full p-3 rounded-xl border border-slate-200 text-sm font-semibold focus:outline-none focus:border-[#2a2477]">
+          </div>
+          <div>
+            <label class="block text-xs font-bold text-[#2a2477] mb-1">عدد الساعات المقطوعة المسبقة</label>
+            <input type="number" id="prev-hours" placeholder="مثال: 45" min="0" class="w-full p-3 rounded-xl border border-slate-200 text-sm font-semibold focus:outline-none focus:border-[#2a2477]">
+          </div>
+        </div>
+
+        <!-- قائمة المواد -->
+        <div class="mb-4">
+          <h3 class="text-lg font-bold text-[#2a2477] mb-3">مواد الفصل الحالي</h3>
+          <div id="courses-list" class="space-y-3">
+            <div class="course-row flex items-center gap-3">
+              <input type="number" placeholder="العلامة (مثلاً 77)" min="0" max="100" class="course-grade w-1/2 p-2.5 rounded-xl border border-slate-200 text-xs sm:text-sm font-bold text-[#2a2477] focus:outline-none focus:border-[#2a2477]">
+              <select class="course-hours w-1/2 p-2.5 rounded-xl border border-slate-200 text-xs sm:text-sm font-bold text-[#2a2477] focus:outline-none focus:border-[#2a2477]">
+                <option value="3">3 ساعات</option>
+                <option value="1">ساعة واحدة</option>
+                <option value="2">ساعتان</option>
+                <option value="4">4 ساعات</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <!-- أزرار الإضافة والحساب -->
+        <div class="flex flex-wrap gap-3 mb-6">
+          <button onclick="addCourseRow()" class="bg-slate-200 text-[#2a2477] text-xs font-bold px-4 py-2.5 rounded-xl hover:bg-slate-300 transition flex items-center gap-2">
+            <i class="fa-solid fa-plus"></i> إضافة مادة جديدة
+          </button>
+          <button onclick="calculateGPA()" class="bg-[#2a2477] text-white text-xs font-bold px-6 py-2.5 rounded-xl hover:bg-indigo-900 transition flex items-center gap-2 mr-auto shadow-md">
+            <i class="fa-solid fa-calculator"></i> احسب المعدل
+          </button>
+        </div>
+
+        <!-- نتيجة الحساب -->
+        <div id="result-box" class="hidden bg-[#2a2477] text-white p-6 rounded-2xl text-center space-y-4">
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div class="bg-white/10 p-3 rounded-xl">
+              <span class="block text-xs font-semibold text-slate-200 mb-1">المعدل الفصلي</span>
+              <span id="term-gpa" class="text-3xl font-extrabold text-yellow-400">0.00%</span>
+            </div>
+            <div class="bg-white/10 p-3 rounded-xl">
+              <span class="block text-xs font-semibold text-slate-200 mb-1">المعدل التراكمي الجديد</span>
+              <span id="cumulative-gpa" class="text-3xl font-extrabold text-yellow-400">0.00%</span>
+            </div>
+          </div>
+          <div class="text-xs font-semibold text-slate-200 border-t border-white/10 pt-3">
+            حالة المواد: <span id="status-summary" class="font-bold text-white"></span>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- قسم الخطط الدراسية لكل كلية -->
+    <section class="max-w-6xl mx-auto px-6 pb-16">
+      <div class="text-center mb-10">
+        <h2 class="text-3xl font-extrabold text-[#2a2477] flex items-center justify-center gap-3">
+          <i class="fa-solid fa-graduation-cap text-yellow-500"></i>
+          الخطط الدراسية حسب الكلية
+        </h2>
+        <p class="text-slate-600 font-medium text-sm mt-2">اختر الكلية لعرض وتحميل الخطط الدراسية الخاصة بها</p>
+      </div>
+
+      <!-- أزرار اختيار الكليات -->
+      <div class="flex flex-wrap justify-center gap-3 mb-8">
+        <button onclick="showFaculty('it')" class="faculty-btn active bg-[#2a2477] text-white font-bold px-5 py-2.5 rounded-xl shadow transition text-sm flex items-center gap-2" id="btn-it">
+          <i class="fa-solid fa-laptop-code"></i> تكنولوجيا المعلومات
+        </button>
+        <button onclick="showFaculty('engineering')" class="faculty-btn bg-white/80 text-[#2a2477] border border-slate-200 font-bold px-5 py-2.5 rounded-xl hover:bg-slate-100 transition text-sm flex items-center gap-2" id="btn-engineering">
+          <i class="fa-solid fa-gears"></i> الهندسة
+        </button>
+        <button onclick="showFaculty('law')" class="faculty-btn bg-white/80 text-[#2a2477] border border-slate-200 font-bold px-5 py-2.5 rounded-xl hover:bg-slate-100 transition text-sm flex items-center gap-2" id="btn-law">
+          <i class="fa-solid fa-scale-balanced"></i> الحقوق
+        </button>
+        <button onclick="showFaculty('sharia')" class="faculty-btn bg-white/80 text-[#2a2477] border border-slate-200 font-bold px-5 py-2.5 rounded-xl hover:bg-slate-100 transition text-sm flex items-center gap-2" id="btn-sharia">
+          <i class="fa-solid fa-mosque"></i> الشريعة
+        </button>
+        <button onclick="showFaculty('arts')" class="faculty-btn bg-white/80 text-[#2a2477] border border-slate-200 font-bold px-5 py-2.5 rounded-xl hover:bg-slate-100 transition text-sm flex items-center gap-2" id="btn-arts">
+          <i class="fa-solid fa-book-open-reader"></i> الآداب
+        </button>
+      </div>
+
+      <!-- 1. تكنولوجيا المعلومات -->
+      <div id="faculty-it" class="faculty-content grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div class="bg-white/90 p-6 rounded-3xl border border-slate-200/80 shadow-sm text-center">
+          <div class="w-12 h-12 bg-yellow-400 rounded-2xl mx-auto flex items-center justify-center text-[#2a2477] text-xl mb-4 shadow-sm"><i class="fa-solid fa-code"></i></div>
+          <h3 class="text-lg font-bold text-[#2a2477] mb-2">علم الحاسوب</h3>
+          <a href="https://drive.google.com/file/d/1C-AvtXTVsTjTjKg31BTPRDlV71lIfUqJ/view?usp=drive_link" target="_blank" class="inline-flex items-center gap-2 bg-[#2a2477] text-white text-xs font-bold px-4 py-2 rounded-xl hover:bg-indigo-900 transition"><i class="fa-solid fa-file-pdf"></i> عرض الخطة</a>
+        </div>
+        <div class="bg-white/90 p-6 rounded-3xl border border-slate-200/80 shadow-sm text-center">
+          <div class="w-12 h-12 bg-yellow-400 rounded-2xl mx-auto flex items-center justify-center text-[#2a2477] text-xl mb-4 shadow-sm"><i class="fa-solid fa-shield-halved"></i></div>
+          <h3 class="text-lg font-bold text-[#2a2477] mb-2">أمن المعلومات</h3>
+          <a href="https://drive.google.com/file/d/1aMTmOt1iFYE_SkXT-jzbr0ijKd1gCi1_/view?usp=drive_link" target="_blank" class="inline-flex items-center gap-2 bg-[#2a2477] text-white text-xs font-bold px-4 py-2 rounded-xl hover:bg-indigo-900 transition"><i class="fa-solid fa-file-pdf"></i> عرض الخطة</a>
+        </div>
+        <div class="bg-white/90 p-6 rounded-3xl border border-slate-200/80 shadow-sm text-center">
+          <div class="w-12 h-12 bg-yellow-400 rounded-2xl mx-auto flex items-center justify-center text-[#2a2477] text-xl mb-4 shadow-sm"><i class="fa-solid fa-brain"></i></div>
+          <h3 class="text-lg font-bold text-[#2a2477] mb-2">الذكاء الاصطناعي</h3>
+          <a href="https://drive.google.com/file/d/1EeuNHLRLNnTdmJmHxaBTvvnv2tiFRyUL/view?usp=drive_link" target="_blank" class="inline-flex items-center gap-2 bg-[#2a2477] text-white text-xs font-bold px-4 py-2 rounded-xl hover:bg-indigo-900 transition"><i class="fa-solid fa-file-pdf"></i> عرض الخطة</a>
+        </div>
+        <div class="bg-white/90 p-6 rounded-3xl border border-slate-200/80 shadow-sm text-center">
+          <div class="w-12 h-12 bg-yellow-400 rounded-2xl mx-auto flex items-center justify-center text-[#2a2477] text-xl mb-4 shadow-sm"><i class="fa-solid fa-database"></i></div>
+          <h3 class="text-lg font-bold text-[#2a2477] mb-2">نظم المعلومات الحاسوبية</h3>
+          <a href="https://drive.google.com/file/d/1RkUuX_0Po_3BGyIxgA4N4aYDHNjSamE1/view?usp=drive_link" target="_blank" class="inline-flex items-center gap-2 bg-[#2a2477] text-white text-xs font-bold px-4 py-2 rounded-xl hover:bg-indigo-900 transition"><i class="fa-solid fa-file-pdf"></i> عرض الخطة</a>
+        </div>
+        <div class="bg-white/90 p-6 rounded-3xl border border-slate-200/80 shadow-sm text-center">
+          <div class="w-12 h-12 bg-yellow-400 rounded-2xl mx-auto flex items-center justify-center text-[#2a2477] text-xl mb-4 shadow-sm"><i class="fa-solid fa-laptop-code"></i></div>
+          <h3 class="text-lg font-bold text-[#2a2477] mb-2">هندسة البرمجيات</h3>
+          <a href="https://drive.google.com/file/d/1TfHPR0ZLgs_mM6OMrd-ev364xqmpVibx/view?usp=drive_link" target="_blank" class="inline-flex items-center gap-2 bg-[#2a2477] text-white text-xs font-bold px-4 py-2 rounded-xl hover:bg-indigo-900 transition"><i class="fa-solid fa-file-pdf"></i> عرض الخطة</a>
+        </div>
+      </div>
+
+      <!-- 2. الهندسة -->
+      <div id="faculty-engineering" class="faculty-content hidden grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div class="bg-white/90 p-6 rounded-3xl border border-slate-200/80 shadow-sm text-center">
+          <div class="w-12 h-12 bg-yellow-400 rounded-2xl mx-auto flex items-center justify-center text-[#2a2477] text-xl mb-4 shadow-sm"><i class="fa-solid fa-building"></i></div>
+          <h3 class="text-lg font-bold text-[#2a2477] mb-2">الهندسة المدنية</h3>
+          <a href="https://drive.google.com/file/d/1f3nx8pt3Pf4vYbA6ptrACKuSljOdzcCo/view?usp=drive_link" target="_blank" class="inline-flex items-center gap-2 bg-[#2a2477] text-white text-xs font-bold px-4 py-2 rounded-xl hover:bg-indigo-900 transition"><i class="fa-solid fa-file-pdf"></i> عرض الخطة</a>
+        </div>
+        <div class="bg-white/90 p-6 rounded-3xl border border-slate-200/80 shadow-sm text-center">
+          <div class="w-12 h-12 bg-yellow-400 rounded-2xl mx-auto flex items-center justify-center text-[#2a2477] text-xl mb-4 shadow-sm"><i class="fa-solid fa-microchip"></i></div>
+          <h3 class="text-lg font-bold text-[#2a2477] mb-2">هندسة الحاسوب</h3>
+          <a href="https://drive.google.com/file/d/180BG8iVtIZmCt2PyOq0dJyRLuG8DPoiO/view?usp=drive_link" target="_blank" class="inline-flex items-center gap-2 bg-[#2a2477] text-white text-xs font-bold px-4 py-2 rounded-xl hover:bg-indigo-900 transition"><i class="fa-solid fa-file-pdf"></i> عرض الخطة</a>
+        </div>
+        <div class="bg-white/90 p-6 rounded-3xl border border-slate-200/80 shadow-sm text-center">
+          <div class="w-12 h-12 bg-yellow-400 rounded-2xl mx-auto flex items-center justify-center text-[#2a2477] text-xl mb-4 shadow-sm"><i class="fa-solid fa-gears"></i></div>
+          <h3 class="text-lg font-bold text-[#2a2477] mb-2">هندسة النظم الصناعية</h3>
+          <a href="https://drive.google.com/file/d/1wMpqocFR0i2YihmW1wn6AoJp1MjxxRbt/view?usp=drive_link" target="_blank" class="inline-flex items-center gap-2 bg-[#2a2477] text-white text-xs font-bold px-4 py-2 rounded-xl hover:bg-indigo-900 transition"><i class="fa-solid fa-file-pdf"></i> عرض الخطة</a>
+        </div>
+        <div class="bg-white/90 p-6 rounded-3xl border border-slate-200/80 shadow-sm text-center">
+          <div class="w-12 h-12 bg-yellow-400 rounded-2xl mx-auto flex items-center justify-center text-[#2a2477] text-xl mb-4 shadow-sm"><i class="fa-solid fa-compass-drafting"></i></div>
+          <h3 class="text-lg font-bold text-[#2a2477] mb-2">هندسة العمارة</h3>
+          <a href="https://drive.google.com/file/d/1WDFSQAKH-DI8mWg4pN1KFSbRNFaWvVU0/view?usp=drive_link" target="_blank" class="inline-flex items-center gap-2 bg-[#2a2477] text-white text-xs font-bold px-4 py-2 rounded-xl hover:bg-indigo-900 transition"><i class="fa-solid fa-file-pdf"></i> عرض الخطة</a>
+        </div>
+        <div class="bg-white/90 p-6 rounded-3xl border border-slate-200/80 shadow-sm text-center">
+          <div class="w-12 h-12 bg-yellow-400 rounded-2xl mx-auto flex items-center justify-center text-[#2a2477] text-xl mb-4 shadow-sm"><i class="fa-solid fa-wrench"></i></div>
+          <h3 class="text-lg font-bold text-[#2a2477] mb-2">الهندسة الميكانيكية</h3>
+          <a href="https://drive.google.com/file/d/1pLPUzrz0Q8WjYGyWjYPX84C501exjwzY/view?usp=drive_link" target="_blank" class="inline-flex items-center gap-2 bg-[#2a2477] text-white text-xs font-bold px-4 py-2 rounded-xl hover:bg-indigo-900 transition"><i class="fa-solid fa-file-pdf"></i> عرض الخطة</a>
+        </div>
+        <div class="bg-white/90 p-6 rounded-3xl border border-slate-200/80 shadow-sm text-center">
+          <div class="w-12 h-12 bg-yellow-400 rounded-2xl mx-auto flex items-center justify-center text-[#2a2477] text-xl mb-4 shadow-sm"><i class="fa-solid fa-flask-vial"></i></div>
+          <h3 class="text-lg font-bold text-[#2a2477] mb-2">الهندسة الكيماوية</h3>
+          <a href="https://drive.google.com/file/d/1_2glO6X8T3hTKZp-vFgqe1cP-_qcmI-a/view?usp=drive_link" target="_blank" class="inline-flex items-center gap-2 bg-[#2a2477] text-white text-xs font-bold px-4 py-2 rounded-xl hover:bg-indigo-900 transition"><i class="fa-solid fa-file-pdf"></i> عرض الخطة</a>
+        </div>
+        <div class="bg-white/90 p-6 rounded-3xl border border-slate-200/80 shadow-sm text-center">
+          <div class="w-12 h-12 bg-yellow-400 rounded-2xl mx-auto flex items-center justify-center text-[#2a2477] text-xl mb-4 shadow-sm"><i class="fa-solid fa-tower-broadcast"></i></div>
+          <h3 class="text-lg font-bold text-[#2a2477] mb-2">الهندسة الكهربائية / إتصالات</h3>
+          <a href="https://drive.google.com/file/d/1sPiR9wBxXsjdmCR_RtFwhCU37Tbgntx1/view?usp=drive_link" target="_blank" class="inline-flex items-center gap-2 bg-[#2a2477] text-white text-xs font-bold px-4 py-2 rounded-xl hover:bg-indigo-900 transition"><i class="fa-solid fa-file-pdf"></i> عرض الخطة</a>
+        </div>
+        <div class="bg-white/90 p-6 rounded-3xl border border-slate-200/80 shadow-sm text-center">
+          <div class="w-12 h-12 bg-yellow-400 rounded-2xl mx-auto flex items-center justify-center text-[#2a2477] text-xl mb-4 shadow-sm"><i class="fa-solid fa-bolt"></i></div>
+          <h3 class="text-lg font-bold text-[#2a2477] mb-2">الهندسة الكهربائية / قوى وتحكم</h3>
+          <a href="https://drive.google.com/file/d/1wG4q8F96jaQmPasYInbYRKU9i092Zoo7/view?usp=drive_link" target="_blank" class="inline-flex items-center gap-2 bg-[#2a2477] text-white text-xs font-bold px-4 py-2 rounded-xl hover:bg-indigo-900 transition"><i class="fa-solid fa-file-pdf"></i> عرض الخطة</a>
+        </div>
+        <div class="bg-white/90 p-6 rounded-3xl border border-slate-200/80 shadow-sm text-center">
+          <div class="w-12 h-12 bg-yellow-400 rounded-2xl mx-auto flex items-center justify-center text-[#2a2477] text-xl mb-4 shadow-sm"><i class="fa-solid fa-fire"></i></div>
+          <h3 class="text-lg font-bold text-[#2a2477] mb-2">الميكانيكية / قوى حرارية وطاقة</h3>
+          <a href="https://drive.google.com/file/d/1_xErPu0P8Ch4xZvX3E1ewWbVgpC7WIiw/view?usp=drive_link" target="_blank" class="inline-flex items-center gap-2 bg-[#2a2477] text-white text-xs font-bold px-4 py-2 rounded-xl hover:bg-indigo-900 transition"><i class="fa-solid fa-file-pdf"></i> عرض الخطة</a>
+        </div>
+        <div class="bg-white/90 p-6 rounded-3xl border border-slate-200/80 shadow-sm text-center">
+          <div class="w-12 h-12 bg-yellow-400 rounded-2xl mx-auto flex items-center justify-center text-[#2a2477] text-xl mb-4 shadow-sm"><i class="fa-solid fa-droplet"></i></div>
+          <h3 class="text-lg font-bold text-[#2a2477] mb-2">المدنية / مياه وبيئة</h3>
+          <a href="https://drive.google.com/file/d/1K_v6DWP4op9KSRN1qARcHpDbam2hv6_b/view?usp=drive_link" target="_blank" class="inline-flex items-center gap-2 bg-[#2a2477] text-white text-xs font-bold px-4 py-2 rounded-xl hover:bg-indigo-900 transition"><i class="fa-solid fa-file-pdf"></i> عرض الخطة</a>
+        </div>
+        <!--<div class="bg-white/90 p-6 rounded-3xl border border-slate-200/80 shadow-sm text-center">
+          <div class="w-12 h-12 bg-yellow-400 rounded-2xl mx-auto flex items-center justify-center text-[#2a2477] text-xl mb-4 shadow-sm"><i class="fa-solid fa-network-wired"></i></div>
+          <h3 class="text-lg font-bold text-[#2a2477] mb-2">هندسة الحاسوب / أمن وشبكات</h3>
+          <a href="#" target="_blank" class="inline-flex items-center gap-2 bg-[#2a2477] text-white text-xs font-bold px-4 py-2 rounded-xl hover:bg-indigo-900 transition"><i class="fa-solid fa-file-pdf"></i> عرض الخطة</a>
+        </div>-->
+        <div class="bg-white/90 p-6 rounded-3xl border border-slate-200/80 shadow-sm text-center">
+          <div class="w-12 h-12 bg-yellow-400 rounded-2xl mx-auto flex items-center justify-center text-[#2a2477] text-xl mb-4 shadow-sm"><i class="fa-solid fa-microchip"></i></div>
+          <h3 class="text-lg font-bold text-[#2a2477] mb-2">الكهربائية / إلكترونيات</h3>
+          <a href="https://drive.google.com/file/d/1JittJVCCmZL4IFAz9xcbmP4h_ApHvw33/view?usp=drive_link" target="_blank" class="inline-flex items-center gap-2 bg-[#2a2477] text-white text-xs font-bold px-4 py-2 rounded-xl hover:bg-indigo-900 transition"><i class="fa-solid fa-file-pdf"></i> عرض الخطة</a>
+        </div>
+      </div>
+
+      <!-- 3. الحقوق -->
+      <div id="faculty-law" class="faculty-content hidden grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div class="bg-white/90 p-6 rounded-3xl border border-slate-200/80 shadow-sm text-center">
+          <div class="w-12 h-12 bg-yellow-400 rounded-2xl mx-auto flex items-center justify-center text-[#2a2477] text-xl mb-4 shadow-sm"><i class="fa-solid fa-scale-balanced"></i></div>
+          <h3 class="text-lg font-bold text-[#2a2477] mb-2">الحقوق</h3>
+          <a href="https://drive.google.com/file/d/1G7nTVutrq_zdoHGmQkIxVKvOyM--tY6R/view?usp=drive_link" target="_blank" class="inline-flex items-center gap-2 bg-[#2a2477] text-white text-xs font-bold px-4 py-2 rounded-xl hover:bg-indigo-900 transition"><i class="fa-solid fa-file-pdf"></i> عرض الخطة</a>
+        </div>
+      </div>
+
+      <!-- 4. الشريعة -->
+      <div id="faculty-sharia" class="faculty-content hidden grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div class="bg-white/90 p-6 rounded-3xl border border-slate-200/80 shadow-sm text-center">
+          <div class="w-12 h-12 bg-yellow-400 rounded-2xl mx-auto flex items-center justify-center text-[#2a2477] text-xl mb-4 shadow-sm"><i class="fa-solid fa-book-quran"></i></div>
+          <h3 class="text-lg font-bold text-[#2a2477] mb-2">الفقه وأصوله</h3>
+          <a href="https://drive.google.com/file/d/1MttgOw6znexHq5DDwfmtTgUFw1xXrvYa/view?usp=drive_link" target="_blank" class="inline-flex items-center gap-2 bg-[#2a2477] text-white text-xs font-bold px-4 py-2 rounded-xl hover:bg-indigo-900 transition"><i class="fa-solid fa-file-pdf"></i> عرض الخطة</a>
+        </div>
+        <div class="bg-white/90 p-6 rounded-3xl border border-slate-200/80 shadow-sm text-center">
+          <div class="w-12 h-12 bg-yellow-400 rounded-2xl mx-auto flex items-center justify-center text-[#2a2477] text-xl mb-4 shadow-sm"><i class="fa-solid fa-mosque"></i></div>
+          <h3 class="text-lg font-bold text-[#2a2477] mb-2">أصول الدين</h3>
+          <a href="https://drive.google.com/file/d/1KfEOU6KOhNFVoENXvz-Vfw442FAOfvvV/view?usp=drive_link" target="_blank" class="inline-flex items-center gap-2 bg-[#2a2477] text-white text-xs font-bold px-4 py-2 rounded-xl hover:bg-indigo-900 transition"><i class="fa-solid fa-file-pdf"></i> عرض الخطة</a>
+        </div>
+      </div>
+
+      <!-- 5. الآداب -->
+      <div id="faculty-arts" class="faculty-content hidden grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div class="bg-white/90 p-6 rounded-3xl border border-slate-200/80 shadow-sm text-center">
+          <div class="w-12 h-12 bg-yellow-400 rounded-2xl mx-auto flex items-center justify-center text-[#2a2477] text-xl mb-4 shadow-sm"><i class="fa-solid fa-language"></i></div>
+          <h3 class="text-lg font-bold text-[#2a2477] mb-2">اللغة العربية وآدابها</h3>
+          <a href="https://drive.google.com/file/d/13zCx2Cbt8NZQa6xFAYXyrdjj8FVtwm2n/view?usp=drive_link" target="_blank" class="inline-flex items-center gap-2 bg-[#2a2477] text-white text-xs font-bold px-4 py-2 rounded-xl hover:bg-indigo-900 transition"><i class="fa-solid fa-file-pdf"></i> عرض الخطة</a>
+        </div>
+        <div class="bg-white/90 p-6 rounded-3xl border border-slate-200/80 shadow-sm text-center">
+          <div class="w-12 h-12 bg-yellow-400 rounded-2xl mx-auto flex items-center justify-center text-[#2a2477] text-xl mb-4 shadow-sm"><i class="fa-solid fa-globe"></i></div>
+          <h3 class="text-lg font-bold text-[#2a2477] mb-2">اللغة الإنجليزية وآدابها</h3>
+          <a href="https://drive.google.com/file/d/1x2uqi3b480q8JySfA1_iHryFqWujUbpA/view?usp=drive_link" target="_blank" class="inline-flex items-center gap-2 bg-[#2a2477] text-white text-xs font-bold px-4 py-2 rounded-xl hover:bg-indigo-900 transition"><i class="fa-solid fa-file-pdf"></i> عرض الخطة</a>
+        </div>
+        <div class="bg-white/90 p-6 rounded-3xl border border-slate-200/80 shadow-sm text-center">
+          <div class="w-12 h-12 bg-yellow-400 rounded-2xl mx-auto flex items-center justify-center text-[#2a2477] text-xl mb-4 shadow-sm"><i class="fa-solid fa-comments"></i></div>
+          <h3 class="text-lg font-bold text-[#2a2477] mb-2">اللغات الأوروبية (فرنسية وإنجليزية)</h3>
+          <a href="https://drive.google.com/file/d/11AdhcBTgccaMQNIsH9GCuUGIAR5B4ra7/view?usp=drive_link" target="_blank" class="inline-flex items-center gap-2 bg-[#2a2477] text-white text-xs font-bold px-4 py-2 rounded-xl hover:bg-indigo-900 transition"><i class="fa-solid fa-file-pdf"></i> عرض الخطة</a>
+        </div>
+        <div class="bg-white/90 p-6 rounded-3xl border border-slate-200/80 shadow-sm text-center">
+          <div class="w-12 h-12 bg-yellow-400 rounded-2xl mx-auto flex items-center justify-center text-[#2a2477] text-xl mb-4 shadow-sm"><i class="fa-solid fa-book-bookmark"></i></div>
+          <h3 class="text-lg font-bold text-[#2a2477] mb-2">الترجمة</h3>
+          <a href="https://drive.google.com/file/d/1veFlZTX2l1tLBPL6aO5hua-Xlnj451bF/view?usp=drive_link" target="_blank" class="inline-flex items-center gap-2 bg-[#2a2477] text-white text-xs font-bold px-4 py-2 rounded-xl hover:bg-indigo-900 transition"><i class="fa-solid fa-file-pdf"></i> عرض الخطة</a>
+        </div>
+        <div class="bg-white/90 p-6 rounded-3xl border border-slate-200/80 shadow-sm text-center">
+          <div class="w-12 h-12 bg-yellow-400 rounded-2xl mx-auto flex items-center justify-center text-[#2a2477] text-xl mb-4 shadow-sm"><i class="fa-solid fa-graduation-cap"></i></div>
+          <h3 class="text-lg font-bold text-[#2a2477] mb-2">اللغة الإنجليزية التطبيقية</h3>
+          <a href="https://drive.google.com/file/d/1GZizQmwm31FuZTj5YZABWpXSkgTUTzFw/view?usp=drive_link" target="_blank" class="inline-flex items-center gap-2 bg-[#2a2477] text-white text-xs font-bold px-4 py-2 rounded-xl hover:bg-indigo-900 transition"><i class="fa-solid fa-file-pdf"></i> عرض الخطة</a>
+        </div>
+        <div class="bg-white/90 p-6 rounded-3xl border border-slate-200/80 shadow-sm text-center">
+          <div class="w-12 h-12 bg-yellow-400 rounded-2xl mx-auto flex items-center justify-center text-[#2a2477] text-xl mb-4 shadow-sm"><i class="fa-solid fa-pen-nib"></i></div>
+          <h3 class="text-lg font-bold text-[#2a2477] mb-2">الترجمة التحريرية</h3>
+          <a href="https://drive.google.com/file/d/1YgRCWBtBqqtMBUqeIN2kpqdQ2yNRVW8L/view?usp=drive_link" target="_blank" class="inline-flex items-center gap-2 bg-[#2a2477] text-white text-xs font-bold px-4 py-2 rounded-xl hover:bg-indigo-900 transition"><i class="fa-solid fa-file-pdf"></i> عرض الخطة</a>
+        </div>
+      </div>
+
+    </section>
+  </div>
+
+  <!-- Footer -->
+  <footer class="text-center py-8 border-t border-slate-200/60 mt-auto">
+    <p class="text-[#2a2477] font-bold text-sm flex items-center justify-center gap-1">
+      <i class="fa-regular fa-lightbulb text-yellow-500"></i>
+      تيم فكرة — IDEA TEAM
+    </p>
+    <p class="text-slate-500 text-xs mt-2 font-medium">فكرة تجمعنا... ونجاحكم هدفنا.</p>
+  </footer>
+
+  <script>
+    // التنقل بين الكليات
+    function showFaculty(facultyId) {
+      document.querySelectorAll('.faculty-content').forEach(el => el.classList.add('hidden'));
+      document.querySelectorAll('.faculty-btn').forEach(btn => {
+        btn.classList.remove('bg-[#2a2477]', 'text-white', 'shadow');
+        btn.classList.add('bg-white/80', 'text-[#2a2477]', 'border', 'border-slate-200');
+      });
+
+      document.getElementById('faculty-' + facultyId).classList.remove('hidden');
+      const activeBtn = document.getElementById('btn-' + facultyId);
+      activeBtn.classList.remove('bg-white/80', 'text-[#2a2477]', 'border', 'border-slate-200');
+      activeBtn.classList.add('bg-[#2a2477]', 'text-white', 'shadow');
+    }
+
+    // حساب المعدل
+    function addCourseRow() {
+      const container = document.getElementById('courses-list');
+      const row = document.createElement('div');
+      row.className = 'course-row flex items-center gap-3';
+      row.innerHTML = `
+        <input type="number" placeholder="العلامة (مثلاً 77)" min="0" max="100" class="course-grade w-1/2 p-2.5 rounded-xl border border-slate-200 text-xs sm:text-sm font-bold text-[#2a2477] focus:outline-none focus:border-[#2a2477]">
+        <select class="course-hours w-1/2 p-2.5 rounded-xl border border-slate-200 text-xs sm:text-sm font-bold text-[#2a2477] focus:outline-none focus:border-[#2a2477]">
+          <option value="3">3 ساعات</option>
+          <option value="1">ساعة واحدة</option>
+          <option value="2">ساعتان</option>
+          <option value="4">4 ساعات</option>
+        </select>
+      `;
+      container.appendChild(row);
+    }
+
+    function calculateGPA() {
+      const grades = document.querySelectorAll('.course-grade');
+      const hours = document.querySelectorAll('.course-hours');
+
+      let totalTermPoints = 0;
+      let totalTermHours = 0;
+      let passedCount = 0;
+      let failedCount = 0;
+
+      for (let i = 0; i < grades.length; i++) {
+        const gradeVal = parseFloat(grades[i].value);
+        const hourVal = parseFloat(hours[i].value);
+
+        if (!isNaN(gradeVal) && gradeVal >= 0 && gradeVal <= 100) {
+          totalTermPoints += gradeVal * hourVal;
+          totalTermHours += hourVal;
+
+          if (gradeVal >= 50) {
+            passedCount++;
+          } else {
+            failedCount++;
+          }
+        }
+      }
+
+      if (totalTermHours === 0) {
+        alert('الرجاء إدخال علامة مادة واحدة على الأقل بين 0 و 100');
+        return;
+      }
+
+      const termGPA = totalTermPoints / totalTermHours;
+      document.getElementById('term-gpa').innerText = termGPA.toFixed(2) + '%';
+
+      const prevGPA = parseFloat(document.getElementById('prev-gpa').value) || 0;
+      const prevHours = parseFloat(document.getElementById('prev-hours').value) || 0;
+
+      let cumGPA = termGPA;
+      if (prevHours > 0 && prevGPA > 0) {
+        const totalPoints = (prevGPA * prevHours) + totalTermPoints;
+        const totalHours = prevHours + totalTermHours;
+        cumGPA = totalPoints / totalHours;
+      }
+
+      document.getElementById('cumulative-gpa').innerText = cumGPA.toFixed(2) + '%';
+      document.getElementById('status-summary').innerText = `عدد المواد الناجحة (50 فما فوق): ${passedCount} | الراسبة: ${failedCount}`;
+      document.getElementById('result-box').classList.remove('hidden');
+    }
+  </script>
+
+</body>
+</html>
